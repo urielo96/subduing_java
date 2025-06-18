@@ -1,4 +1,4 @@
-package PatonesDisenio.Factory;
+package PatonesDisenio.Factory_01;
 
 public class NotificacionSms implements Notificacion{
     public void enviar(String mensaje) {

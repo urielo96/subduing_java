@@ -1,4 +1,4 @@
-package PatonesDisenio.Factory;
+package PatonesDisenio.Factory_01;
 
 public class NotificacionFactory {
     public static Notificacion crear(String tipo) {

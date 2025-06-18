@@ -1,0 +1,1 @@
+// Supongamos que tenemos una aplicación que tenga diferentes tipos de documentos.

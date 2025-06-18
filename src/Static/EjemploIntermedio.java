@@ -10,7 +10,10 @@ public class EjemploIntermedio {
         individual++; // Este va a aumentar la variable individual ( Esta no es Static)
     }
 
-    // Vamos a crear objetos para poder ver como funcionan
+    // Tambien podemos crear un metodo estatico
+    static void metodoEstatico() {
+        System.out.println("Este es un ejemplo de un metodo estatico");
+    }
 
 
 

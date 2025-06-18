@@ -1,4 +1,4 @@
-package MiniProyecto;
+package Relaciones.MiniProyecto;
 
 public class Reporte
 {

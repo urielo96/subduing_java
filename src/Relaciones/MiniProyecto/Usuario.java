@@ -1,4 +1,4 @@
-package MiniProyecto;
+package Relaciones.MiniProyecto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 public class Usuario
 {
     private String nombre;
-    private List<Auto> autos;  //Agregacion puede tener varios autos
+    private List<Auto> autos;  //Agregación puede tener varios autos
 
     public Usuario(String nombre) {
         this.nombre = nombre;

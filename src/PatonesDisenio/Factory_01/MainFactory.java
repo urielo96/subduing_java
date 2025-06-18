@@ -1,4 +1,4 @@
-package PatonesDisenio.Factory;
+package PatonesDisenio.Factory_01;
 
 public class MainFactory {
     public static void main(String[] args) {
