@@ -57,4 +57,20 @@ public class Venta {
         }
     }
 
+    // Método para mostrar los detalles de la venta
+    public void mostrarVenta() {
+        System.out.println("Cliente: " + cliente.getNombre() + " (" + cliente.getEmail() + ")");
+        System.out.println("Productos vendidos:");
+        double total = 0.0;
+        for (Map.Entry<Producto, Integer> entry : productosVendidos.entrySet()) {
+            Producto producto = entry.getKey();
+            int cantidad = entry.getValue();
+            double subtotal = producto.getPrecio() * cantidad;
+            System.out.println("- " + producto.getNombre() + " x" + cantidad + " ($" + producto.getPrecio() + " c/u) = $" + subtotal);
+            total += subtotal;
+        }
+        System.out.println("Total de la venta: $" + total);
+        System.out.println("-----------------------------");
+    }
+
 }
