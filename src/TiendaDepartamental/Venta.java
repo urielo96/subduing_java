@@ -1,49 +1,60 @@
 package TiendaDepartamental;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Venta {
-    private List<Producto> productos;
-    private int cantidad;
-    private Cliente cliente; // Asociación con Cliente Relación uno a muchos
+    private Map<Producto, Integer> productosVendidos; // Usando un mapa para almacenar productos y sus cantidades
+    private Cliente cliente;
+
+
 
     // Constructor para inicializar los atributos de la venta
-    public Venta(List<Producto> productos, int cantidad, Cliente cliente) {
-        this.productos = productos;
-        this.cantidad = cantidad;
+    public Venta(Cliente cliente) {
+        this.productosVendidos = new HashMap<>();
         this.cliente = cliente;
     }
 
-    // Registrando una venta
-    public void registrarVenta(List<Producto> productos, int cantidad, Cliente cliente) {
-        this.productos = productos;
-        this.cantidad = cantidad;
-        this.cliente = cliente;
-
-        // Imprimiendo detalles de la venta
-        System.out.println("Venta registrada para el cliente: " + cliente.getNombre());
-        System.out.println("Productos vendidos:");
-        for (Producto producto : productos) {
-            System.out.println("- " + producto.getNombre() + " (Cantidad: " + cantidad + ")");
+    // Metodos para agregar productos a la venta
+    public void agregarProducto(Producto producto, int cantidad) {
+        // Verificando si el producto ya está en la venta
+        if (productosVendidos.containsKey(producto)) {
+            System.out.println("Producto ya agregado: " + producto.getNombre());
+        } else {
+            productosVendidos.put(producto, cantidad);
         }
     }
 
-    // Metodo para verificar stock
-    public boolean verificarStock(Producto producto, int cantidad) {
-        // Revisando si el stock del producto es suficiente
-        if (producto.getStock() < cantidad) {
-            System.out.println("No hay suficiente stock para el producto: " + producto.getNombre());
-            return false;
+    // Verificar el stock de los productos antes de completar la venta
+    public boolean verificarStock() {
+        for (Map.Entry<Producto, Integer> entry : productosVendidos.entrySet()) {
+            Producto producto = entry.getKey();
+            int cantidad = entry.getValue();
+            if (producto.getStock() < cantidad) {
+                System.out.println("Stock insuficiente para el producto: " + producto.getNombre());
+                return false; // Stock insuficiente
+            }
         }
-        return true;
+        return true; // Stock suficiente
     }
 
-    // Método para calcular el total de la venta
-    public double calcularTotal() {
-        double total = 0.0;
-        for (Producto producto : productos) {
-            total += producto.getPrecio() * cantidad; // Asumiendo que el precio es por unidad
+    // Método para completar la venta
+    public void completarVenta() {
+        if (verificarStock()) {
+            double total = 0.0;
+            for (Map.Entry<Producto, Integer> entry : productosVendidos.entrySet()) {
+                Producto producto = entry.getKey();
+                int cantidad = entry.getValue();
+                total += producto.getPrecio() * cantidad;
+                // Reducir el stock del producto
+                producto.setStock(producto.getStock() - cantidad);
+            }
+            System.out.println("Venta completada para el cliente: " + cliente.getNombre());
+            System.out.println("Total a pagar: $" + total);
+        } else {
+            System.out.println("No se puede completar la venta debido a stock insuficiente.");
         }
-        return total;
     }
+
 }
